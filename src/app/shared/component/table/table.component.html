@@ -1,0 +1,20 @@
+<ng-container>
+  <h3>{{ title }}</h3>
+  <div class="row justify-content-start">
+    <div class="col-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="table-primary">
+            <th *ngFor="let item of header">{{ item }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of body">
+            <td>{{ b.input }}</td>
+            <td>{{ b.output }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>

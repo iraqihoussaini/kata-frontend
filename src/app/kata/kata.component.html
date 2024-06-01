@@ -1,0 +1,53 @@
+<app-header title="Kata FOO BAR QUIX"></app-header>
+
+<app-main>
+  <app-template-ordred-list
+    [title]="templatePrerequis.title"
+    [paragraph]="templatePrerequis.paragraph"
+    [list]="templatePrerequis.list"
+  ></app-template-ordred-list>
+
+  <app-template-ordred-list
+    [paragraph]="templateGithub.paragraph"
+    [list]="templateGithub.list"
+  ></app-template-ordred-list>
+
+  <app-template-ordred-list
+    [title]="templateBackend.title"
+    [paragraph]="templateBackend.paragraph"
+    [list]="templateBackend.list"
+  ></app-template-ordred-list>
+  <app-table
+    [title]="templateExample.title"
+    [header]="templateExample.header"
+    [body]="templateExample.body"
+  ></app-table>
+
+  <app-template-ordred-list
+    [title]="templateBackend.title"
+    [paragraph]="templateBackend.paragraph"
+    [list]="templateBackend.list"
+  ></app-template-ordred-list>
+  <app-template-ordred-list
+    [title]="templateFrontend.title"
+    [paragraph]="templateFrontend.paragraph"
+  ></app-template-ordred-list>
+
+  <app-template-ordred-list
+    [title]="templateDelivery.title"
+    [paragraph]="templateDelivery.paragraph"
+    [listWithLink]="templateDelivery.listWithLink"
+  ></app-template-ordred-list>
+
+  <div class="d-flex justify-content-center">
+    <button
+      type="button text-center"
+      class="btn btn-primary"
+      (click)="openModal()"
+    >
+      Tester
+    </button>
+  </div>
+</app-main>
+
+<app-modal-form></app-modal-form>

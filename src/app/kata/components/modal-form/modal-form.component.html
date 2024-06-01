@@ -1,0 +1,55 @@
+<app-modal id="modal-inputOutput">
+  <div class="modal-header">
+    <h5 class="modal-title">Formulaire</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+  </div>
+
+  <div>
+    <form [formGroup]="form">
+      <div *ngIf="(isLoading$ | async) == false ;else loading" class="modal-body">
+        <p>Veuillez saisir le nombre en entrée</p>
+          <label class="form-label" htmlFor="input">Input:</label>
+          <input
+            id="input"
+            type="text"
+            class="form-control"
+            formControlName="input"
+            [ngClass]="{ 'is-invalid': showError }"
+          />
+
+        <div class="invalid-feedback d-block" *ngIf="showError">
+          {{textError}}
+        </div>
+
+        <div
+          *ngIf="(output$ | async) !== ''"
+        class="alert alert-success"
+        role="alert"
+      >
+        <p id="output">
+          Output: "<strong>{{ output$ | async }}</strong
+          >"
+        </p>
+      </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">
+          Fermer
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="onClickSubmit()"
+          [disabled]="(isLoading$ | async) == true"
+        >
+          Valider
+        </button>
+      </div>
+    </form>
+  </div>
+</app-modal>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>
