@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { KataComponent } from './kata.component';
 import { HeaderComponent } from '../shared/component/header/header.component';
 import { MainComponent } from '../shared/component/main/main.component';
@@ -10,6 +10,7 @@ import { TemplateOrdredListComponent } from '../shared/component/template-ordred
 import { TableComponent } from '../shared/component/table/table.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { ModalComponent } from '../shared/component/modal/modal.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('KataComponent', () => {
   let component: KataComponent;
@@ -17,9 +18,10 @@ describe('KataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
-      declarations: [ KataComponent, HeaderComponent, MainComponent, SpinnerComponent, TemplateOrdredListComponent, TableComponent, ModalFormComponent, ModalComponent ], 
-    })
+    declarations: [KataComponent, HeaderComponent, MainComponent, SpinnerComponent, TemplateOrdredListComponent, TableComponent, ModalFormComponent, ModalComponent],
+    imports: [FormsModule, ReactiveFormsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(KataComponent);

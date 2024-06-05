@@ -6,10 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
 import { ModalFormComponent } from './modal-form.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { KataBackendService } from '../../services/kata-backend.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { TextError } from '../../enums/text-error.enum';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ModalFormComponent', () => {
   let component: ModalFormComponent;
@@ -17,25 +18,24 @@ describe('ModalFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        FormsModule,
+    declarations: [ModalFormComponent, ModalComponent],
+    imports: [FormsModule,
         ReactiveFormsModule,
         CommonModule,
         RouterModule,
-        BrowserModule,
-      ],
-      declarations: [ModalFormComponent, ModalComponent],
-      providers: [
+        BrowserModule],
+    providers: [
         {
-          provide: KataBackendService,
-          useValue: {
-            // adding custom behavior to the service
-            convertInputToOutPut: jasmine.createSpy().and.returnValue(of('1')),
-          },
+            provide: KataBackendService,
+            useValue: {
+                // adding custom behavior to the service
+                convertInputToOutPut: jasmine.createSpy().and.returnValue(of('1')),
+            },
         },
-      ],
-    }).compileComponents();
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(ModalFormComponent);
     component = fixture.componentInstance;

@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { KataBackendService } from './kata-backend.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environment';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('KataBackendService', () => {
   let service: KataBackendService;
@@ -14,8 +12,9 @@ describe('KataBackendService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(KataBackendService);
     httpMock = TestBed.inject(HttpTestingController);
   });

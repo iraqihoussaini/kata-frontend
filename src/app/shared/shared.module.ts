@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TemplateOrdredListComponent } from './component/template-ordred-list/template-ordred-list.component';
 import { TableComponent } from './component/table/table.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -18,21 +18,15 @@ const shared = [
   MainComponent,
   SpinnerComponent
 ];
-@NgModule({
-  declarations: [...shared],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
-  exports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ...shared,
-  ],
-})
+@NgModule({ declarations: [...shared],
+    exports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ...shared,
+    ], imports: [CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule {}
