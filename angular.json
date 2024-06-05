@@ -81,10 +81,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "kata-frontend:build:production"
+              "buildTarget": "kata-frontend:build:production"
             },
             "development": {
-              "browserTarget": "kata-frontend:build:development"
+              "buildTarget": "kata-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,7 +92,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kata-frontend:build"
+            "buildTarget": "kata-frontend:build"
           }
         },
         "test": {
